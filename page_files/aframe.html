@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://www.google.com/recaptcha/api2/aframe -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript">
+    (function() {
+      var container = document.querySelector('#_tcx-bmyrwy6pyok');
+      if (!container) {
+        return;
+      }
+
+      function addToContainer(url, text) {
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('data-tcx-url', url);
+        wrapper.innerText = text;
+        container.appendChild(wrapper);
+      }
+
+      const fetch = window.fetch
+      window.fetch = function() {
+        return Promise.resolve(fetch.apply(window, arguments))
+            .then(async response => {
+              if (response.ok) {
+                try {
+                  const clone = response.clone();
+                  const json = await clone.json();
+                  addToContainer(clone.url, JSON.stringify(json));
+                } catch (err) {}
+              }
+              return response;
+            });
+      };
+
+      var XHR = XMLHttpRequest.prototype;
+      var send = XHR.send;
+      var open = XHR.open;
+      XHR.open = function(method, url) {
+        this.url = url;
+        return open.apply(this, arguments);
+      };
+      XHR.send = function() {
+        this.addEventListener('load', function() {
+          try {
+            const response = this.response;
+            if (response && response.length) {
+              const firstChar = response[0];
+              if (firstChar === '[' || firstChar === '{') {
+                addToContainer(this.url, response);
+              }
+            }
+          } catch (err) {
+            // No-op.
+          }
+        });
+        return send.apply(this, arguments);
+      };
+    })();
+  </script></head><body><script nonce="">/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener("message",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem("rc::a")?sessionStorage.getItem("rc::b"):"");window.document.body.appendChild(d);sessionStorage.setItem("rc::e",parseInt(sessionStorage.getItem("rc::e")||0)+1);}}}catch(b){}});window.parent.postMessage("_grecaptcha_ready", "*");}catch(b){}</script><img src="./sodar"></body></html>
