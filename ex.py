@@ -1,4 +1,5 @@
 from cgitb import html
+import re
 from bs4 import BeautifulSoup
 import requests
 
@@ -23,16 +24,18 @@ def get_answer():
             a = task.find('div', class_="Link Link_wrap Link_pseudo ConstructorForm-TopicName ConstructorForm-TopicName_type_default Link_pseudoBlack")
             
             print(a)
-        print('1')
 
 
-task = get_answer
+def parse(): 
 
+    with open('task.html', 'w') as file:
+        task = str(get_answer())
+        if 'None' in task:
+            task.replace('None', '')
+        else:
+            file.write(str(task)) 
+    
 
-#def parse(): 
-
-#    with open('task.html', 'w') as file:
-#        file.writelines(task.text)
 
 if __name__ == "__main__":
-    get_answer()
+    parse()
