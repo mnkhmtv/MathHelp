@@ -24,16 +24,17 @@ def get_answer():
             a = task.find('div', class_="Link Link_wrap Link_pseudo ConstructorForm-TopicName ConstructorForm-TopicName_type_default Link_pseudoBlack")
             
             print(a)
-
+    return(get_answer())
 
 def parse(): 
 
     with open('task.html', 'w') as file:
-        task = str(get_answer())
-        if 'None' in task:
-            task.replace('None', '')
-        else:
+        task = get_answer()
+        print(task)
+        if task:
             file.write(str(task)) 
+        else:
+            print('nothing')
     
 
 
