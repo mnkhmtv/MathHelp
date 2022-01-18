@@ -1,4 +1,5 @@
 from cgitb import html, text
+from posixpath import dirname
 import re
 from bs4 import BeautifulSoup
 import requests
@@ -40,18 +41,26 @@ def get_answer():
                         print('Link is not found') 
                         continue
 
-                    podthemes = soup.find('div', class_ = 'ConstructorForm-TopicSubs')  
+                    #podthemes = soup.find('div', class_ = 'ConstructorForm-TopicSubs')  
                     
                     link = task.find('a', class_ = 'Link Link_black')
-                    print(link) 
+                    #print(link) 
 
-                    if podthemes:
+                    if link:
 
                         mypath = "./Темы/"
-                       # for theme in os.listdir(mypath):
+                       
+                        #k = name_of_theme.text + '.html'
+                        #print(k)
 
-                       #     c = task.find('a', class_ = 'Link Link_black')
-                        #    print(c)
+                        for theme in os.listdir(mypath):  
+                            names = dirname
+                            #print(names)
+                            #if name_of_theme in mypath:
+                            
+
+
+
                             
 
 
