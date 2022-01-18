@@ -26,28 +26,33 @@ def get_answer():
             if not task:
                 print('Task is not found')
                 continue
-            a = task.find('div', class_="Link Link_wrap Link_pseudo ConstructorForm-TopicName ConstructorForm-TopicName_type_default Link_pseudoBlack")
+            all_things = task.find('div', class_="Link Link_wrap Link_pseudo ConstructorForm-TopicName ConstructorForm-TopicName_type_default Link_pseudoBlack")
             
-            if a:
+            if all_things:
 
-                b = a.find('u', class_ = 'Link-U Link_wrap-U Link_pseudo-U Link_pseudoBlack-U' )
-                #save_file(file_name = b.text + '.html', content = a)
+                name_of_theme = all_things.find('u', class_ = 'Link-U Link_wrap-U Link_pseudo-U Link_pseudoBlack-U' )
+                #save_file(file_name = b.text + '.html', content = all_thing)
 
-                os.mkdir(b.text)
+                #os.mkdir(b.text)
                           
-                for subtopic in task:
-                    if not subtopic:
-                        print('Subtopic is not found') 
+                for link_in_podtheme in task:
+                    if not link_in_podtheme:
+                        print('Link is not found') 
                         continue
 
-                    c = subtopic.find('div', class_ = 'ConstructorForm-TopicSubs')     
+                    podthemes = soup.find('div', class_ = 'ConstructorForm-TopicSubs')  
+                    
+                    link = task.find('a', class_ = 'Link Link_black')
+                    print(link) 
 
-                    if c:
+                    if podthemes:
 
-                        c = task.find('a', class_ = 'Link Link_black')
-                        print(c)
+                        mypath = "./Темы/"
+                       # for theme in os.listdir(mypath):
 
-
+                       #     c = task.find('a', class_ = 'Link Link_black')
+                        #    print(c)
+                            
 
 
 
