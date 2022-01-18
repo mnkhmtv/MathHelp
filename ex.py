@@ -1,7 +1,9 @@
-from cgitb import html
+from cgitb import html, text
 import re
 from bs4 import BeautifulSoup
 import requests
+import os
+
 
 
 URL = "https://math-ege.sdamgia.ru/"
@@ -19,24 +21,44 @@ def get_answer():
         html = file.read()
         soup = BeautifulSoup(html, "lxml")
         all = soup.find_all("div", class_="ConstructorForm-Row")
+
         for task in all:
-            
+            if not task:
+                print('Task is not found')
+                continue
             a = task.find('div', class_="Link Link_wrap Link_pseudo ConstructorForm-TopicName ConstructorForm-TopicName_type_default Link_pseudoBlack")
             
-            print(a)
-    return(get_answer())
+            if a:
 
-def parse(): 
+                b = a.find('u', class_ = 'Link-U Link_wrap-U Link_pseudo-U Link_pseudoBlack-U' )
+                #save_file(file_name = b.text + '.html', content = a)
 
-    with open('task.html', 'w') as file:
-        task = get_answer()
-        print(task)
-        if task:
-            file.write(str(task)) 
-        else:
-            print('nothing')
-    
+                os.mkdir(b.text)
+                          
+                for subtopic in task:
+                    if not subtopic:
+                        print('Subtopic is not found') 
+                        continue
+
+                    c = subtopic.find('div', class_ = 'ConstructorForm-TopicSubs')     
+
+                    if c:
+
+                        c = task.find('a', class_ = 'Link Link_black')
+                        print(c)
+
+
+
+
+
+
+def save_file(file_name, content): 
+
+    with open(file_name, 'w') as file:
+
+        file.write(str(content)) 
+
 
 
 if __name__ == "__main__":
-    parse()
+    get_answer()
