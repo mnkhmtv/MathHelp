@@ -41,20 +41,20 @@ def get_answer():
                         print('Link is not found') 
                         continue
 
-                    #podthemes = soup.find('div', class_ = 'ConstructorForm-TopicSubs')  
+                    podthemes = soup.find('div', class_ = 'ConstructorForm-TopicSubs')  
                     
                     link = task.find('a', class_ = 'Link Link_black')
-                    #print(link) 
+                print(link) 
 
-                    if link:
+                    #if link:
 
-                        mypath = "./Темы/"
+                        #mypath = "./Темы/"
                        
                         #k = name_of_theme.text + '.html'
-                        #print(k)
+                #print(k)
 
-                        for theme in os.listdir(mypath):  
-                            names = dirname
+                        #for theme in os.listdir(mypath):  
+                        #    names = dirname
                             #print(names)
                             #if name_of_theme in mypath:
                             
