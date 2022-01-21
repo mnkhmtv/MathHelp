@@ -5,31 +5,33 @@ from bs4 import BeautifulSoup
 import requests
 import os
 
-URL = 'https://ege.sdamgia.ru/test?id=43128379&nt=True&pub=False&print=true'
+URL = 'https://ege.sdamgia.ru/test?id=43210295&nt=True&pub=False&print=true'
 
 def get_html():
     response = requests.get(url=URL)
-    with open("test.html", "w+") as file:
+    with open("test_3.html", "w+") as file:
         file.writelines(response.text)
         print('1')
 
 def get_answer():
-    with open("test.html", "r") as file:
+    with open("test_3.html", "r") as file:
         html = file.read()
         soup = BeautifulSoup(html, "lxml")
-        all = soup.find_all("div", class_="nobreak")
-        for task in all:
-            if not task:
+        all = soup.find_all("div", class_="prob_maindiv")
+        i = 1
+        for taskanswer in all:
+            if not taskanswer:
                 print('Task is not found')
                 continue
 
-            a = task.find('p', class_ = 'left_margin')
-            #print(a)
+            a = taskanswer.find('p', class_ = 'left_margin')
+            c = taskanswer.find('div', class_ = 'answer')
+            d = a, c
+            #print(d)
             
-            for name in a:
-                b = a.split('.')
-                save_file(file_name = b[0] + '.html',content = a)
-                os.mkdir(a.text)
+            save_file(file_name = str(i) + '.html',content = d)
+            i = i + 1
+            
 
 
 
