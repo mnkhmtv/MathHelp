@@ -33,9 +33,10 @@ def get_answer(file_name: str, theme: str, index: int = 1)->int:
 
             exersice = taskanswer.find('p', class_ = 'left_margin')
             answer = taskanswer.find('div', class_ = 'answer')
-            together = exersice, answer
-            task_file_name: str = 'Темы/' + theme + '/' + 'Задача_' + str(index) + '.html'
-            save_file(file_name = task_file_name,content = together)
+            task_file_name: str = 'Темы/' + theme + '/' + 'Задача_' + str(index) + '/' + 'Задание_' + str(index) + '.html'
+            answer_file_name: str = 'Темы/' + theme + '/' + 'Задача_' + str(index) + '/' + 'Ответ_' + str(index) + '.html'
+            save_file(file_name = task_file_name,content = exersice)
+            save_file(file_name = answer_file_name,content = answer)
             index = index + 1
         return index
 
