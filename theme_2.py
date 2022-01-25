@@ -38,9 +38,9 @@ def get_answer(file_name: str, theme: str, index: int = 1)->int:
             list_of_dirs: list = list()
             mypath = "./Темы/"
             for dirname in os.listdir(mypath):
-                os.mkdir(f'Задача_{index}')
-                save_file(file_name = task_file_name,content = exersice)
+                os.mkdir(f'./Темы/{dirname}/, 'f'Задача_{index}')
                 save_file(file_name = answer_file_name,content = answer)
+                save_file(file_name = task_file_name,content = exersice)
             index = index + 1
         return index
 
